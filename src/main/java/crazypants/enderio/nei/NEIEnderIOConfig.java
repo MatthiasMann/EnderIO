@@ -31,6 +31,9 @@ public class NEIEnderIOConfig implements IConfigureNEI {
     API.registerRecipeHandler(new SoulBinderRecipeHandler());
     API.registerUsageHandler(new SoulBinderRecipeHandler());
 
+    API.registerRecipeHandler(new UpgradeCapBankRecipeHandler());
+    API.registerUsageHandler(new UpgradeCapBankRecipeHandler());
+
     API.hideItem(new ItemStack(EnderIO.blockConduitFacade));
     API.hideItem(new ItemStack(EnderIO.itemEnderface));
     API.hideItem(PainterUtil.applyDefaultPaintedState(new ItemStack(EnderIO.blockPaintedCarpet)));

@@ -950,6 +950,7 @@ enderio.nei.sagmill=SAG Mill
 enderio.nei.slicensplice=Slice'N'Splice
 enderio.nei.soulbinder=Soul Binder
 enderio.nei.vat=Vat
+enderio.nei.upgradeCapBank=Capacitor Bank Upgrade
 enderio.tooltip.burntime=Burn Time:
 enderio.tooltip.oredict=Ore Dictionary:
 enderio.tooltip.meta=Meta:

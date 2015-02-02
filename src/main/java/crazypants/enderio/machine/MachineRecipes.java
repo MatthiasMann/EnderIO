@@ -251,6 +251,10 @@ public class MachineRecipes {
     MinecraftForge.EVENT_BUS.register(inst);
     GameRegistry.addRecipe(inst);
 
+    UpgradeCapBankRecipe ucbr = new UpgradeCapBankRecipe();
+    MinecraftForge.EVENT_BUS.register(ucbr);
+    GameRegistry.addRecipe(ucbr);
+
     //wireless light
     ItemStack poweredLamp = new ItemStack(EnderIO.blockElectricLight, 1, BlockItemElectricLight.Type.ELECTRIC.ordinal());
     ItemStack poweredLampInv = new ItemStack(EnderIO.blockElectricLight, 1, BlockItemElectricLight.Type.ELECTRIC_INV.ordinal());
