@@ -24,9 +24,9 @@ public interface IPowerStorage {
 
   boolean isInputEnabled(ForgeDirection direction);
 
-  int getMaxOutput();
+  int getAvailableOutput();
 
-  int getMaxInput();
+  int getAcceptableInput();
 
   void addEnergy(int amount);
 

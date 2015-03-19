@@ -179,7 +179,7 @@ public class GuiCapacitorBank extends GuiContainerBase {
     maxInputTF.setCanLoseFocus(true);
     maxInputTF.setMaxStringLength(10);
     maxInputTF.setFocused(false);
-    maxInputTF.setText(PowerDisplayUtil.formatPower(capBank.getMaxInput()));
+    maxInputTF.setText(PowerDisplayUtil.formatPower(capBank.getAcceptableInput()));
 
     x = guiLeft + outputX;
     y = guiTop + outputY;
@@ -187,7 +187,7 @@ public class GuiCapacitorBank extends GuiContainerBase {
     maxOutputTF.setCanLoseFocus(true);
     maxOutputTF.setMaxStringLength(10);
     maxOutputTF.setFocused(true);
-    maxOutputTF.setText(PowerDisplayUtil.formatPower(capBank.getMaxOutput()));
+    maxOutputTF.setText(PowerDisplayUtil.formatPower(capBank.getAvailableOutput()));
   }
 
   @Override
@@ -203,27 +203,27 @@ public class GuiCapacitorBank extends GuiContainerBase {
 
   private void updateInputOutput() {
     int input = parsePower(maxInputTF);
-    if(input >= 0 && capBank.getMaxInput() != input) {
+    if(input >= 0 && capBank.getAcceptableInput() != input) {
       setMaxInput(input);
     }
     int output = parsePower(maxOutputTF);
-    if(output >= 0 && capBank.getMaxOutput() != output) {
+    if(output >= 0 && capBank.getAvailableOutput() != output) {
       setMaxOutput(output);
     }
   }
 
   private void setMaxOutput(int output) {
-    if(output != capBank.getMaxOutput()) {
+    if(output != capBank.getAvailableOutput()) {
       capBank.setMaxOutput(output);
-      maxOutputTF.setText(PowerDisplayUtil.formatPower(capBank.getMaxOutput()));
+      maxOutputTF.setText(PowerDisplayUtil.formatPower(capBank.getAvailableOutput()));
       PacketHandler.INSTANCE.sendToServer(new PacketClientState(capBank));
     }
   }
 
   private void setMaxInput(int input) {
-    if(input != capBank.getMaxInput()) {
+    if(input != capBank.getAcceptableInput()) {
       capBank.setMaxInput(input);
-      maxInputTF.setText(PowerDisplayUtil.formatPower(capBank.getMaxInput()));
+      maxInputTF.setText(PowerDisplayUtil.formatPower(capBank.getAcceptableInput()));
       PacketHandler.INSTANCE.sendToServer(new PacketClientState(capBank));
     }
   }

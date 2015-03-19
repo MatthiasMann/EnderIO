@@ -29,8 +29,8 @@ public class PacketClientState implements IMessage, IMessageHandler<PacketClient
     inputMode = capBank.getInputControlMode();
     outputMode = capBank.getOutputControlMode();
 
-    maxInput = capBank.getMaxInput();
-    maxOutput = capBank.getMaxOutput();
+    maxInput = capBank.getAcceptableInput();
+    maxOutput = capBank.getAvailableOutput();
   }
 
   @Override

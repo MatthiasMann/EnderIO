@@ -141,6 +141,11 @@ public class CapBankClientNetwork implements ICapBankNetwork {
   }
 
   @Override
+  public int getAvailableOutput() {
+    return maxEnergySent;
+  }
+
+  @Override
   public int getMaxOutput() {
     return maxEnergySent;
   }
@@ -148,6 +153,11 @@ public class CapBankClientNetwork implements ICapBankNetwork {
   @Override
   public void setMaxOutput(int max) {
     maxEnergySent = MathHelper.clamp_int(max, 0, maxIO);
+  }
+
+  @Override
+  public int getAcceptableInput() {
+    return maxEnergyRecieved;
   }
 
   @Override

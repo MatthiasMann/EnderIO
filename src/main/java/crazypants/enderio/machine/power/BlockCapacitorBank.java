@@ -394,8 +394,8 @@ public class BlockCapacitorBank extends BlockEio implements IGuiHandler, IAdvanc
       String format = Util.TAB + Util.ALIGNRIGHT + EnumChatFormatting.WHITE;
 
       tooltip.add(String.format("%s : %s%s%sRF/t ", Lang.localize("capbank.maxIO"),  format, fmt.format(cap.getMaxIO()), Util.TAB + Util.ALIGNRIGHT));
-      tooltip.add(String.format("%s : %s%s%sRF/t ", Lang.localize("capbank.maxIn"),  format, fmt.format(cap.getMaxInput()), Util.TAB + Util.ALIGNRIGHT));
-      tooltip.add(String.format("%s : %s%s%sRF/t ", Lang.localize("capbank.maxOut"), format, fmt.format(cap.getMaxOutput()), Util.TAB + Util.ALIGNRIGHT));
+      tooltip.add(String.format("%s : %s%s%sRF/t ", Lang.localize("capbank.maxIn"),  format, fmt.format(cap.getAcceptableInput()), Util.TAB + Util.ALIGNRIGHT));
+      tooltip.add(String.format("%s : %s%s%sRF/t ", Lang.localize("capbank.maxOut"), format, fmt.format(cap.getAvailableOutput()), Util.TAB + Util.ALIGNRIGHT));
       tooltip.add("Deprecated. Convert by placing in crafting grid");
     }
   }

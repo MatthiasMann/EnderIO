@@ -633,11 +633,18 @@ public class TileCapBank extends TileEntityEio implements IInternalPowerHandler,
 
   @Override
   public int getMaxEnergyRecieved(ForgeDirection dir) {
-    return getMaxInput();
+    return getAcceptableInput();
   }
 
   @Override
-  public int getMaxInput() {
+  public int getAcceptableInput() {
+    if(network == null) {
+      return getType().getMaxIO();
+    }
+    return network.getAcceptableInput();
+  }
+
+  public int getMaxInputDisplay() {
     if(network == null) {
       return getType().getMaxIO();
     }
@@ -653,7 +660,14 @@ public class TileCapBank extends TileEntityEio implements IInternalPowerHandler,
   }
 
   @Override
-  public int getMaxOutput() {
+  public int getAvailableOutput() {
+    if(network == null) {
+      return getType().getMaxIO();
+    }
+    return network.getAvailableOutput();
+  }
+
+  public int getMaxOutputDisplay() {
     if(network == null) {
       return getType().getMaxIO();
     }

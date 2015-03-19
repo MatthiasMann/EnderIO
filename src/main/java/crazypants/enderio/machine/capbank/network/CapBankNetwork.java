@@ -250,7 +250,7 @@ public class CapBankNetwork implements ICapBankNetwork {
       return;
     }
 
-    int available = getEnergyAvailableForTick(getMaxOutput());
+    int available = getAvailableOutput();
     if(available <= 0) {
       return;
     }
@@ -268,16 +268,6 @@ public class CapBankNetwork implements ICapBankNetwork {
       available -= sent;
     }
     addEnergy(-totalSent);
-  }
-
-  protected int getEnergyAvailableForTick(int limit) {
-    int available;
-    if(energyStored > limit) {
-      available = limit;
-    } else {
-      available = (int) energyStored;
-    }
-    return available;
   }
 
   private int sendPowerTo(EnergyReceptor next, int available) {
@@ -300,25 +290,24 @@ public class CapBankNetwork implements ICapBankNetwork {
       return false;
     }
     boolean chargedItem = false;
-    int available = getEnergyAvailableForTick(getMaxIO());
+    int available = getAvailableOutput();
     for (ItemStack item : items) {
-      if(item != null && available > 0) {
-        int used = 0;
-        if(item.getItem() instanceof IEnergyContainerItem) {
-          IEnergyContainerItem chargable = (IEnergyContainerItem) item.getItem();
+      if(available <= 0) {
+        break;
+      }
+      if(item != null && item.getItem() instanceof IEnergyContainerItem) {
+        IEnergyContainerItem chargable = (IEnergyContainerItem) item.getItem();
 
-          int max = chargable.getMaxEnergyStored(item);
-          int cur = chargable.getEnergyStored(item);
-          int canUse = Math.min(available, max - cur);
-          if(cur < max) {
-            used = chargable.receiveEnergy(item, canUse, false);
+        int max = chargable.getMaxEnergyStored(item);
+        int cur = chargable.getEnergyStored(item);
+        int canUse = Math.min(available, max - cur);
+        if(cur < max) {
+          int used = chargable.receiveEnergy(item, canUse, false);
+          if(used > 0) {
+            addEnergy(-used);
+            chargedItem = true;
+            available -= used;
           }
-
-        }
-        if(used > 0) {
-          addEnergy(-used);
-          chargedItem = true;
-          available -= used;
         }
       }
     }
@@ -361,12 +350,7 @@ public class CapBankNetwork implements ICapBankNetwork {
       return 0;
     }
 
-    long spaceAvailable = maxEnergyStored - energyStored;
-    if(spaceAvailable > Integer.MAX_VALUE) {
-      spaceAvailable = Integer.MAX_VALUE;
-    }
-    int res = Math.min(maxReceive, (int) spaceAvailable);
-    res = Math.min(res, getMaxInput());
+    int res = Math.min(maxReceive, getAcceptableInput());
     if(!simulate) {
       addEnergy(res);
     }
@@ -436,19 +420,32 @@ public class CapBankNetwork implements ICapBankNetwork {
   //----- IO overrides
 
   @Override
-  public int getMaxInput() {
-    if(maxInput == -1) {
-      return maxIO;
+  public int getAcceptableInput() {
+    long spaceAvailable = maxEnergyStored - energyStored;
+    int max = (int)Math.min(spaceAvailable, getMaxInput());
+    if(energyReceived >= max) {
+      return 0;
     }
-    return Math.min(maxInput, maxIO);
+    return max - (int)energyReceived;
+  }
+
+  @Override
+  public int getMaxInput() {
+    return (maxInput < 0) ? maxIO : Math.min(maxInput, maxIO);
+  }
+
+  @Override
+  public int getAvailableOutput() {
+    int max = (int)Math.min(energyStored, getMaxOutput());
+    if(energySend >= max) {
+      return 0;
+    }
+    return max - (int)energySend;
   }
 
   @Override
   public int getMaxOutput() {
-    if(maxOutput == -1) {
-      return maxIO;
-    }
-    return Math.min(maxOutput, maxIO);
+    return (maxOutput < 0) ? maxIO : Math.min(maxOutput, maxIO);
   }
 
   @Override

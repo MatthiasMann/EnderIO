@@ -39,11 +39,15 @@ public interface ICapBankNetwork extends IPowerStorage {
   int getMaxIO();
 
   @Override
+  int getAvailableOutput();
+
   int getMaxOutput();
 
   void setMaxOutput(int max);
 
   @Override
+  int getAcceptableInput();
+
   int getMaxInput();
 
   void setMaxInput(int max);

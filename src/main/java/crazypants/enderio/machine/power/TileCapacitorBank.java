@@ -477,7 +477,7 @@ public class TileCapacitorBank extends TileEntityEio implements IInternalPowerHa
   }
 
   @Override
-  public int getMaxInput() {
+  public int getAcceptableInput() {
     return maxInput;
   }
 
@@ -487,7 +487,7 @@ public class TileCapacitorBank extends TileEntityEio implements IInternalPowerHa
   }
 
   @Override
-  public int getMaxOutput() {
+  public int getAvailableOutput() {
     return maxOutput;
   }
 
