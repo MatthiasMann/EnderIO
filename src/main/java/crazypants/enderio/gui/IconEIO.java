@@ -96,6 +96,12 @@ public final class IconEIO {
   public static final IconEIO ADD_BUT = new IconEIO(208, 32, 8, 8);
   public static final IconEIO MINUS_BUT = new IconEIO(208, 40, 8, 8);
 
+  public static final IconEIO UP_ARROW_OFF   = new IconEIO(240, 116, 16, 8);
+  public static final IconEIO UP_ARROW_ON    = new IconEIO(240, 132, 16, 8);
+  public static final IconEIO DOWN_ARROW_OFF = new IconEIO(240, 124, 16, 8);
+  public static final IconEIO DOWN_ARROW_ON  = new IconEIO(240, 140, 16, 8);
+  public static final IconEIO VSCROLL_THUMB  = new IconEIO(240, 148, 16, 8);
+
   public static final IconEIO SOUND = new IconEIO(176, 208);
 
   public static final IconEIO XP = new IconEIO(128, 224);

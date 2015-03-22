@@ -62,6 +62,7 @@ public enum ModObject {
   blockWeatherObelisk,
   blockTransceiver,
   blockBuffer,
+  blockInventoryPanel,
 
   blockPoweredSpawner,
   itemBrokenSpawner,
