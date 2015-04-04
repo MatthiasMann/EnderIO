@@ -147,20 +147,24 @@ public abstract class GuiContainerBase extends GuiContainer implements ToolTipRe
     return ghostSlots;
   }
 
+  protected void ghostSlotClicked(GhostSlot slot, int x, int y, int button) {
+    ItemStack st = Minecraft.getMinecraft().thePlayer.inventory.getItemStack();
+    slot.putStack(st);
+  }
+
   @Override
-  protected void mouseClicked(int x, int y, int p_73864_3_) {
+  protected void mouseClicked(int x, int y, int button) {
     for (GuiTextField f : textFields) {
-      f.mouseClicked(x, y, p_73864_3_);
+      f.mouseClicked(x, y, button);
     }
     if(!ghostSlots.isEmpty()) {
       GhostSlot slot = getGhostSlot(x, y);
       if(slot != null) {
-        ItemStack st = Minecraft.getMinecraft().thePlayer.inventory.getItemStack();
-        slot.putStack(st);
+        ghostSlotClicked(slot, x, y, button);
         return;
       }
     }
-    super.mouseClicked(x, y, p_73864_3_);
+    super.mouseClicked(x, y, button);
   }
 
   public void addOverlay(IGuiOverlay overlay) {
